@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Kharcha</string>
+    <string-array name="expense_tags">
+        <item>Food</item>
+        <item>Travel</item>
+        <item>Shopping</item>
+        <item>Entertainment</item>
+        <item>Investment</item>
+        <item>Bill</item>
+    </string-array>
+</resources>
