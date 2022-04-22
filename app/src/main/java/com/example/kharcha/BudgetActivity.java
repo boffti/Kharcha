@@ -32,6 +32,7 @@ public class BudgetActivity extends AppCompatActivity {
         btnBudgetSave = findViewById(R.id.btnBudgetSave);
 
         budgetEditText.setText(sharedPreferences.getString("current_budget", "0"));
+        DBHelper dbHelper = new DBHelper(this);
         btnBudgetSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +44,8 @@ public class BudgetActivity extends AppCompatActivity {
                     sharedPreferences.edit().putString("remaining_budget", budget).commit();
                 }
                 sharedPreferences.edit().putString("current_budget", budget).commit();
+                // Need to fix the whole part! Updating current_balance will not update the remaining balance
+                dbHelper.updateRemainingBudget();
                 Log.i("Budget", sharedPreferences.getString("current_budget", "0"));
                 Intent i = new Intent(BudgetActivity.this, MainActivity.class);
                 startActivity(i);
