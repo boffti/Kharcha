@@ -23,6 +23,25 @@ public class AddExpenseActivity extends AppCompatActivity {
     private EditText expenseName, expenseAmount;
     private Button btnExpenseSave;
 
+    private void checkAndSendNotification() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.kharcha", Context.MODE_PRIVATE);
+        double remainingBudget = Double.parseDouble(sharedPreferences.getString("remaining_budget", "0"));
+        double currentBudget = Double.parseDouble(sharedPreferences.getString("current_budget", "0"));
+        double percentage = ((currentBudget - remainingBudget) * 100)/currentBudget;
+        NotificationManagerService nms = new NotificationManagerService(this);
+        if( percentage == 100)
+            nms.sendNotification("Reached 100% of your budget!", "You have spent 100% of your budget before end of this month!");
+        else if (percentage > 100)
+            nms.sendNotification("Exceeded your budget!", "You have spent more than 100% of your budget before end of this month");
+        else if(percentage == 90)
+            nms.sendNotification("Reached 90% of your budget!", "You have spent 90% of your budget before end of this month");
+        else if(percentage > 90)
+            nms.sendNotification("Spending more than 90%!", "You have spent more than 90% of your budget before end of this month");
+
+
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +60,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         tagDropdownSpinner.setAdapter(adapter);
+        DBHelper dbHelper = new DBHelper(this);
 
         btnExpenseSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +84,8 @@ public class AddExpenseActivity extends AppCompatActivity {
                DBHelper DBHelper = new DBHelper(AddExpenseActivity.this);
                boolean success = DBHelper.addOne(expenseModel);
                if(success) {
+                   dbHelper.updateRemainingBudget();
+                   checkAndSendNotification();
                    Intent i = new Intent(AddExpenseActivity.this, MainActivity.class);
                    startActivity(i);
                    Toast.makeText(AddExpenseActivity.this, "Success = " + success, Toast.LENGTH_SHORT).show();
