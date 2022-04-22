@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView textUserName;
     private TextView textTotalBudget;
     private TextView textRemainingBudget;
+    private TextView textXp;
+    private TextView textLevel;
 
     private RecyclerView rv_expenses_list;    
     private RecyclerView.Adapter mAdapter;
@@ -90,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
 
         DBHelper dbHelper = new DBHelper(MainActivity.this);
         List<ExpenseModel> expenses = dbHelper.getAllExpenses();
+
+        textXp = findViewById(R.id.xp);
+        textXp.setText(String.valueOf(dbHelper.calculateXP()));
+
+        int level = (int) Math.floor(dbHelper.calculateXP() > 0 ? (dbHelper.calculateXP() * 1.0 /1000) : 0);
+        textLevel = findViewById(R.id.level);
+        textLevel.setText(String.valueOf(level + 1));
 
         mAdapter = new ExpenseListAdapter(expenses, MainActivity.this);
         rv_expenses_list.setAdapter(mAdapter);
