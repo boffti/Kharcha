@@ -70,6 +70,8 @@ public class AddExpenseActivity extends AppCompatActivity {
 
                    Float remaining = Float.parseFloat(sharedPreferences.getString("remaining_budget", "0")) - Float.parseFloat(expenseAmount.getText().toString());
                    sharedPreferences.edit().putString("remaining_budget", remaining.toString()).commit();
+                   Float totalSpent = Float.parseFloat(sharedPreferences.getString("total_spent", "0")) + Float.parseFloat(expenseAmount.getText().toString());
+                   sharedPreferences.edit().putString("total_spent", totalSpent.toString()).commit();
 
                    expenseModel = new ExpenseModel(1, expenseName.getText().toString(), Float.parseFloat(expenseAmount.getText().toString()), tagDropdownSpinner.getSelectedItem().toString(), formattedDate);
                    Toast.makeText(AddExpenseActivity.this, expenseModel.toString(), Toast.LENGTH_SHORT).show();
