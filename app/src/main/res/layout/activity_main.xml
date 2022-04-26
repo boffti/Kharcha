@@ -227,6 +227,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/graphTab"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -242,11 +243,12 @@
 
                     </com.google.android.material.tabs.TabLayout>
 
-                    <ImageView
-                        android:id="@+id/imageView"
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/overview" />
+                        android:layout_height="350dp"
+                        />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

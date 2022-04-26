@@ -3,8 +3,10 @@ package com.example.kharcha;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView textRemainingBudget;
     private TextView textXp;
     private TextView textLevel;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     private RecyclerView rv_expenses_list;    
     private RecyclerView.Adapter mAdapter;
@@ -102,5 +107,15 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new ExpenseListAdapter(expenses, MainActivity.this);
         rv_expenses_list.setAdapter(mAdapter);
+
+        tabLayout = findViewById(R.id.graphTab);
+        viewPager = findViewById(R.id.viewPager);
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        GraphVPAdapter graphVPAdapter = new GraphVPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        graphVPAdapter.addFragment(new CategoricalGraph(), "Categorical");
+        graphVPAdapter.addFragment(new HistoricalGraph(), "Historical");
+        viewPager.setAdapter(graphVPAdapter);
     }
 }
