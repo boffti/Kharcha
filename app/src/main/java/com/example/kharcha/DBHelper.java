@@ -87,8 +87,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStmt = "CREATE TABLE " + EXPENSE_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " TEXT, " + COLUMN_AMOUNT + " FLOAT, " + COLUMN_TAG + " TEXT, " + COLUMN_CREATED_AT + " TEXT)";
-        String createPeriodStmt = "CREATE TABLE " + PERIOD_TABLE + " (" + P_COLUMN_PERIOD + " TEXT PRIMARY KEY, " + P_COLUMN_REMAINING_BUDGET + " FLOAT, " + P_COLUMN_CREATED_AT + " TEXT)";
+        String createTableStmt = "CREATE TABLE IF NOT EXISTS " + EXPENSE_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " TEXT, " + COLUMN_AMOUNT + " FLOAT, " + COLUMN_TAG + " TEXT, " + COLUMN_CREATED_AT + " TEXT)";
+        String createPeriodStmt = "CREATE TABLE IF NOT EXISTS " + PERIOD_TABLE + " (" + P_COLUMN_PERIOD + " TEXT PRIMARY KEY, " + P_COLUMN_REMAINING_BUDGET + " FLOAT, " + P_COLUMN_CREATED_AT + " TEXT)";
         db.execSQL(createTableStmt);
         db.execSQL(createPeriodStmt);
     }
