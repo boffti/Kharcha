@@ -25,9 +25,9 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     private void checkAndSendNotification() {
         SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.kharcha", Context.MODE_PRIVATE);
-        double remainingBudget = Double.parseDouble(sharedPreferences.getString("remaining_budget", "0"));
+        double totalSpent = Double.parseDouble(sharedPreferences.getString("total_spent", "0"));
         double currentBudget = Double.parseDouble(sharedPreferences.getString("current_budget", "0"));
-        double percentage = ((currentBudget - remainingBudget) * 100)/currentBudget;
+        double percentage = ((totalSpent) * 100)/currentBudget;
         NotificationManagerService nms = new NotificationManagerService(this);
         if( percentage == 100)
             nms.sendNotification("Reached 100% of your budget!", "You have spent 100% of your budget before end of this month!");
