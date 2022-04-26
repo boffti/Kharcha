@@ -44,7 +44,6 @@ public class BudgetActivity extends AppCompatActivity {
                     sharedPreferences.edit().putString("remaining_budget", budget).commit();
                 }
                 sharedPreferences.edit().putString("current_budget", budget).commit();
-                // Need to fix the whole part! Updating current_balance will not update the remaining balance
                 dbHelper.updateRemainingBudget();
                 Log.i("Budget", sharedPreferences.getString("current_budget", "0"));
                 Intent i = new Intent(BudgetActivity.this, MainActivity.class);

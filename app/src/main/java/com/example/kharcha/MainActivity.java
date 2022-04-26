@@ -93,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
         textTotalBudget.setText(sharedPreferences.getString("current_budget", "0"));
 
         textRemainingBudget = findViewById(R.id.textRemainingBudget);
-        textRemainingBudget.setText(sharedPreferences.getString("remaining_budget", "0"));
+        Float remainingBudget = Float.parseFloat(sharedPreferences.getString("current_budget", "0")) - Float.parseFloat(sharedPreferences.getString("total_spent", "0"));
+        textRemainingBudget.setText(String.valueOf(remainingBudget));
 
         DBHelper dbHelper = new DBHelper(MainActivity.this);
         List<ExpenseModel> expenses = dbHelper.getAllExpenses();

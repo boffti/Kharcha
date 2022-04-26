@@ -124,7 +124,8 @@ public class DBHelper extends SQLiteOpenHelper {
         String period = new SimpleDateFormat("MMMM-yyyy", Locale.getDefault()).format(new Date());
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(P_COLUMN_REMAINING_BUDGET, Float.parseFloat(sharedPreferences.getString("remaining_budget", "0")));
+        Float remainingBudget = Float.parseFloat(sharedPreferences.getString("current_budget", "0")) - Float.parseFloat(sharedPreferences.getString("total_spent", "0"));
+        cv.put(P_COLUMN_REMAINING_BUDGET, remainingBudget);
         cv.put(P_COLUMN_PERIOD, period);
         cv.put(P_COLUMN_CREATED_AT, createdOn);
         long insertPeriod = db.insertWithOnConflict(PERIOD_TABLE, null, cv, SQLiteDatabase.CONFLICT_REPLACE);
