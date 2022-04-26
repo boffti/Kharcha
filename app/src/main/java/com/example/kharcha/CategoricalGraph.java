@@ -49,12 +49,12 @@ public class CategoricalGraph extends Fragment {
                 pieEntryList.add(new PieEntry(entry.getValue(), entry.getKey()));
             }
 
-            System.out.println("PIE DATA: " + pieEntryList + pieChart);
-            PieDataSet set = new PieDataSet(pieEntryList, "Monthly Expenses");
+            PieDataSet set = new PieDataSet(pieEntryList, "");
             set.setColors(ColorTemplate.MATERIAL_COLORS);
             set.setSliceSpace(5f);
             PieData pd = new PieData(set);
             pieChart.setData(pd);
+            pieChart.getDescription().setText("Monthly Expenses");
             pieChart.invalidate(); // refresh
 
         }
