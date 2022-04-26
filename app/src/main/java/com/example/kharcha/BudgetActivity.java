@@ -16,8 +16,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     private EditText incomeEditText;
     private EditText budgetEditText;
-    private Button btnIncomeSave;
-    private Button btnBudgetSave;
+    private Button btnIncomeBudgetSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +27,17 @@ public class BudgetActivity extends AppCompatActivity {
 
         incomeEditText = findViewById(R.id.incomeEditText);
         budgetEditText = findViewById(R.id.budgetEditText);
-        btnIncomeSave = findViewById(R.id.btnIncomeSave);
-        btnBudgetSave = findViewById(R.id.btnBudgetSave);
+        btnIncomeBudgetSave = findViewById(R.id.btnIncomeBudgetSave);
 
+        incomeEditText.setText(sharedPreferences.getString("income", "0"));
         budgetEditText.setText(sharedPreferences.getString("current_budget", "0"));
         DBHelper dbHelper = new DBHelper(this);
-        btnBudgetSave.setOnClickListener(new View.OnClickListener() {
+        btnIncomeBudgetSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String budget = budgetEditText.getText().toString();
-                if(!sharedPreferences.contains("remaining_budget")) {
-                    sharedPreferences.edit().putString("remaining_budget", budget).commit();
-                }
-                if(sharedPreferences.getString("current_budget", "0").equals(sharedPreferences.getString("remaining_budget", "0"))) {
-                    sharedPreferences.edit().putString("remaining_budget", budget).commit();
-                }
+                String income = incomeEditText.getText().toString();
+                sharedPreferences.edit().putString("income", income).commit();
                 sharedPreferences.edit().putString("current_budget", budget).commit();
                 dbHelper.updateRemainingBudget();
                 Log.i("Budget", sharedPreferences.getString("current_budget", "0"));
