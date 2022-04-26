@@ -115,6 +115,17 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean deleteOne(ExpenseModel expenseModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String q = "DELETE FROM " + EXPENSE_TABLE + " WHERE " + COLUMN_ID + " = " + expenseModel.getId();
+        Cursor cursor = db.rawQuery(q, null);
+        if(cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Call this whenever "remaining_budget" is updated
     public boolean updateRemainingBudget() {
         SharedPreferences sharedPreferences = this.context.getSharedPreferences("com.example.kharcha", Context.MODE_PRIVATE);

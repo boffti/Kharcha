@@ -26,7 +26,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ExpenseRecyclerViewInterface {
 
     private CardView budgetCardView;
     private FloatingActionButton fabAddBudget;
@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
 
     public SQLiteDatabase db;
-
+    List<ExpenseModel> expenses;
+    DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
         Float remainingBudget = Float.parseFloat(sharedPreferences.getString("current_budget", "0")) - Float.parseFloat(sharedPreferences.getString("total_spent", "0"));
         textRemainingBudget.setText(String.valueOf(remainingBudget));
 
-        DBHelper dbHelper = new DBHelper(MainActivity.this);
-        List<ExpenseModel> expenses = dbHelper.getAllExpenses();
+        dbHelper = new DBHelper(MainActivity.this);
+        expenses = dbHelper.getAllExpenses();
 
         textXp = findViewById(R.id.xp);
         textXp.setText(String.valueOf(dbHelper.calculateXP()));
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         textLevel = findViewById(R.id.level);
         textLevel.setText(String.valueOf(level + 1));
 
-        mAdapter = new ExpenseListAdapter(expenses, MainActivity.this);
+        mAdapter = new ExpenseListAdapter(expenses, MainActivity.this, this);
         rv_expenses_list.setAdapter(mAdapter);
 
         tabLayout = findViewById(R.id.graphTab);
@@ -123,5 +124,20 @@ public class MainActivity extends AppCompatActivity {
         graphVPAdapter.addFragment(new CategoricalGraph(), "Categorical");
         graphVPAdapter.addFragment(new HistoricalGraph(), "Historical");
         viewPager.setAdapter(graphVPAdapter);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+//        ExpenseModel expenseToDelete = expenses.get(position);
+//        dbHelper.deleteOne(expenseToDelete);
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+        ExpenseModel expenseToDelete = expenses.get(position);
+        dbHelper.deleteOne(expenseToDelete);
+        Toast.makeText(MainActivity.this, "Expsense Deleted", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(i);
     }
 }
