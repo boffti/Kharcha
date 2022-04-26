@@ -37,9 +37,6 @@ public class AddExpenseActivity extends AppCompatActivity {
             nms.sendNotification("Reached 90% of your budget!", "You have spent 90% of your budget before end of this month");
         else if(percentage > 90)
             nms.sendNotification("Spending more than 90%!", "You have spent more than 90% of your budget before end of this month");
-
-
-
     }
 
     @Override
