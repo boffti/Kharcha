@@ -65,13 +65,13 @@ public class AddExpenseActivity extends AppCompatActivity {
         Log.i("User Categories", user_categories);
         String[] categories = categoryDeserialize(user_categories);
 
-        tagDropdownSpinner = findViewById(R.id.tagDropdownSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.expense_tags, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        tagDropdownSpinner.setAdapter(adapter);
+//        tagDropdownSpinner = findViewById(R.id.tagDropdownSpinner);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                R.array.expense_tags, android.R.layout.simple_spinner_item);
+//        // Specify the layout to use when the list of choices appears
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // Apply the adapter to the spinner
+//        tagDropdownSpinner.setAdapter(adapter);
         DBHelper dbHelper = new DBHelper(this);
 
         tv_current_category = findViewById(R.id.tv_current_category);
