@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +28,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     private Button btnExpenseSave;
     private Button btnAddCategory;
     private String user_categories;
+    private TextView tv_current_category;
 
     private void checkAndSendNotification() {
         SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.kharcha", Context.MODE_PRIVATE);
@@ -72,7 +74,8 @@ public class AddExpenseActivity extends AppCompatActivity {
         tagDropdownSpinner.setAdapter(adapter);
         DBHelper dbHelper = new DBHelper(this);
 
-
+        tv_current_category = findViewById(R.id.tv_current_category);
+        tv_current_category.setText(sharedPreferences.getString("current_category_selected", ""));
 
         btnExpenseSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +90,8 @@ public class AddExpenseActivity extends AppCompatActivity {
                    sharedPreferences.edit().putString("remaining_budget", remaining.toString()).commit();
                    Float totalSpent = Float.parseFloat(sharedPreferences.getString("total_spent", "0")) + Float.parseFloat(expenseAmount.getText().toString());
                    sharedPreferences.edit().putString("total_spent", totalSpent.toString()).commit();
-
-                   expenseModel = new ExpenseModel(1, expenseName.getText().toString(), Float.parseFloat(expenseAmount.getText().toString()), tagDropdownSpinner.getSelectedItem().toString(), formattedDate);
+                   String current_selected_category = sharedPreferences.getString("current_category_selected", "");
+                   expenseModel = new ExpenseModel(1, expenseName.getText().toString(), Float.parseFloat(expenseAmount.getText().toString()), current_selected_category, formattedDate);
                    Toast.makeText(AddExpenseActivity.this, expenseModel.toString(), Toast.LENGTH_SHORT).show();
                } catch (Exception e) {
                     Toast.makeText(AddExpenseActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();

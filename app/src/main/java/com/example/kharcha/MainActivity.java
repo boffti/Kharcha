@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements ExpenseRecyclerVi
             sharedPreferences.edit().putString("user_name", "User").apply();
         }
 
+        if(!sharedPreferences.contains("user_categories")) {
+            sharedPreferences.edit().putString("user_categories", "Food;Travel;Shopping;Entertainment;Investment;Bill").apply();
+        }
+
         budgetCardView = findViewById(R.id.budgetCardView);
         budgetCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +144,9 @@ public class MainActivity extends AppCompatActivity implements ExpenseRecyclerVi
         Float totalSpent = Float.parseFloat(sharedPreferences.getString("total_spent", "0")) - Float.parseFloat(expenseToDelete.getAmount().toString());
         sharedPreferences.edit().putString("total_spent", totalSpent.toString()).commit();
         Toast.makeText(MainActivity.this, "Expsense Deleted", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(MainActivity.this, MainActivity.class);
-        startActivity(i);
+                finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 }
