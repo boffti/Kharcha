@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ExpenseRecyclerVi
     public SQLiteDatabase db;
     List<ExpenseModel> expenses;
     DBHelper dbHelper;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements ExpenseRecyclerVi
         layoutManager = new LinearLayoutManager(this);
         rv_expenses_list.setLayoutManager(layoutManager);
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.kharcha", Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences("com.example.kharcha", Context.MODE_PRIVATE);
         if(!sharedPreferences.contains("user_name")) {
             sharedPreferences.edit().putString("user_name", "User").apply();
         }
@@ -136,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements ExpenseRecyclerVi
     public void onItemLongClick(int position) {
         ExpenseModel expenseToDelete = expenses.get(position);
         dbHelper.deleteOne(expenseToDelete);
+        Float totalSpent = Float.parseFloat(sharedPreferences.getString("total_spent", "0")) - Float.parseFloat(expenseToDelete.getAmount().toString());
+        sharedPreferences.edit().putString("total_spent", totalSpent.toString()).commit();
         Toast.makeText(MainActivity.this, "Expsense Deleted", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(MainActivity.this, MainActivity.class);
         startActivity(i);

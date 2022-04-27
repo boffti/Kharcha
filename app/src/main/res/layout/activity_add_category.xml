@@ -5,21 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddExpenseActivity">
+    tools:context=".AddCategoryActivity">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:src="@drawable/transfer" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Add your expense here. Don't forget to tag it with a category!"
+        android:text="Add a new category here."
         android:textAlignment="textStart"
         android:textSize="20sp" />
 
@@ -39,11 +39,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="New Expense"
+                android:text="New Category"
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/expenseName"
+                android:id="@+id/categoryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -51,49 +51,12 @@
                 android:hint="Name"
                 android:inputType="textPersonName" />
 
-            <EditText
-                android:id="@+id/expenseAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:ems="10"
-                android:hint="Amount"
-                android:inputType="number" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Category" />
-
-                <Spinner
-                    android:id="@+id/tagDropdownSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:paddingVertical="8dp" />
-            </LinearLayout>
-
             <Button
-                android:id="@+id/btnExpenseSave"
+                android:id="@+id/btnCategorySave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/btnAddCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
-        android:layout_marginStart="16dp"
-        android:text="Add Category"
-        android:textAlignment="center" />
 </LinearLayout>

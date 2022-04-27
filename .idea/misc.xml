@@ -3,17 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../layout/custom_preview.xml" value="0.34479166666666666" />
+        <entry key="..\:/Users/bofft/AndroidStudioProjects/Kharcha/app/src/main/res/layout/activity_add_category.xml" value="0.23513513513513515" />
         <entry key="..\:/Users/bofft/AndroidStudioProjects/Kharcha/app/src/main/res/layout/activity_add_expense.xml" value="0.25" />
         <entry key="..\:/Users/bofft/AndroidStudioProjects/Kharcha/app/src/main/res/layout/activity_add_user_name.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/bofft/AndroidStudioProjects/Kharcha/app/src/main/res/layout/activity_budget.xml" value="0.22" />
         <entry key="..\:/Users/bofft/AndroidStudioProjects/Kharcha/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/bofft/AndroidStudioProjects/Kharcha/app/src/main/res/layout/expense_item.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_add_expense.xml" value="0.17572463768115942" />
-        <entry key="app/src/main/res/layout/activity_budget.xml" value="0.17572463768115942" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_categorical_graph.xml" value="0.4020673668902853" />
-        <entry key="app/src/main/res/layout/fragment_historical_graph.xml" value="0.25271739130434784" />
       </map>
     </option>
   </component>

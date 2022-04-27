@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -22,6 +25,8 @@ public class AddExpenseActivity extends AppCompatActivity {
     private Spinner tagDropdownSpinner;
     private EditText expenseName, expenseAmount;
     private Button btnExpenseSave;
+    private Button btnAddCategory;
+    private String user_categories;
 
     private void checkAndSendNotification() {
         SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.kharcha", Context.MODE_PRIVATE);
@@ -39,6 +44,10 @@ public class AddExpenseActivity extends AppCompatActivity {
             nms.sendNotification("Spending more than 90%!", "You have spent more than 90% of your budget before end of this month");
     }
 
+    private String[] categoryDeserialize(String catString) {
+        return catString.split(";");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +59,10 @@ public class AddExpenseActivity extends AppCompatActivity {
         expenseAmount = findViewById(R.id.expenseAmount);
         btnExpenseSave = findViewById(R.id.btnExpenseSave);
 
+        user_categories = sharedPreferences.getString("user_categories", "");
+        Log.i("User Categories", user_categories);
+        String[] categories = categoryDeserialize(user_categories);
+
         tagDropdownSpinner = findViewById(R.id.tagDropdownSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.expense_tags, android.R.layout.simple_spinner_item);
@@ -58,6 +71,8 @@ public class AddExpenseActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         tagDropdownSpinner.setAdapter(adapter);
         DBHelper dbHelper = new DBHelper(this);
+
+
 
         btnExpenseSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,5 +108,15 @@ public class AddExpenseActivity extends AppCompatActivity {
                }
             }
         });
+
+        btnAddCategory = findViewById(R.id.btnAddCategory);
+        btnAddCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddExpenseActivity.this, AddCategoryActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 }
