@@ -61,8 +61,6 @@ public class HistoricalGraph extends Fragment {
         }
 
 
-        barEntryList.add(new BarEntry(1f, 333f));
-        xLabels.add("Temp");
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xLabels));
         BarDataSet set = new BarDataSet(barEntryList, "");
         BarData barData = new BarData(set);
@@ -83,9 +81,9 @@ public class HistoricalGraph extends Fragment {
         barChart.getLegend().setEnabled(false);
 
         // Left Axis numbers and line
-        barChart.getAxisLeft().setDrawGridLines(false);
-        barChart.getAxisLeft().setDrawLabels(false);
-        barChart.getAxisLeft().setDrawAxisLine(false);
+//        barChart.getAxisLeft().setDrawGridLines(false);
+//        barChart.getAxisLeft().setDrawLabels(false);
+//        barChart.getAxisLeft().setDrawAxisLine(false);
 
         barChart.getXAxis().setDrawGridLines(false);
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
