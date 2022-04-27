@@ -14,7 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class AddCategoryActivity extends AppCompatActivity implements  CatRecyclerViewInterface{
@@ -80,16 +82,17 @@ public class AddCategoryActivity extends AppCompatActivity implements  CatRecycl
         Log.i("Long pressed", String.valueOf(position));
         String categories_serialized = sp.getString("user_categories", "");
         Log.i("Long pressed string", categories_serialized);
-        List<String> categories_deserialized = Arrays.asList(categories_serialized.split(";"));
+        ArrayList<String> categories_deserialized = new ArrayList<>();
+        Collections.addAll(categories_deserialized, categories_serialized.split(";"));
         categories_deserialized.remove(position);
         String new_categories_serialized = String.join(";", categories_deserialized);
         sp.edit().putString("user_categories", new_categories_serialized).apply();
         Log.i("Long pressed new string", new_categories_serialized);
 
-//        Toast.makeText(AddCategoryActivity.this, "Category Deleted", Toast.LENGTH_SHORT).show();
-//        finish();
-//        overridePendingTransition(0, 0);
-//        startActivity(getIntent());
-//        overridePendingTransition(0, 0);
+        Toast.makeText(AddCategoryActivity.this, "Category Deleted", Toast.LENGTH_SHORT).show();
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 }
