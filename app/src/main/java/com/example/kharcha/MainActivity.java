@@ -144,7 +144,8 @@ public class MainActivity extends AppCompatActivity implements ExpenseRecyclerVi
         Float totalSpent = Float.parseFloat(sharedPreferences.getString("total_spent", "0")) - Float.parseFloat(expenseToDelete.getAmount().toString());
         sharedPreferences.edit().putString("total_spent", totalSpent.toString()).commit();
         Toast.makeText(MainActivity.this, "Expsense Deleted", Toast.LENGTH_SHORT).show();
-                finish();
+        dbHelper.updateRemainingBudget();
+        finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
         overridePendingTransition(0, 0);
