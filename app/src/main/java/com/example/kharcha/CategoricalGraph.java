@@ -53,6 +53,7 @@ public class CategoricalGraph extends Fragment {
             set.setColors(ColorTemplate.MATERIAL_COLORS);
             set.setSliceSpace(5f);
             PieData pd = new PieData(set);
+            pd.setValueTextSize(12f);
             pieChart.setData(pd);
             pieChart.getDescription().setText("Monthly Expenses");
             pieChart.invalidate(); // refresh
